@@ -11,7 +11,7 @@ function getHistory(){
         url: '/calculations',
     })
     .then(function (response) {
-        console.log('GET Response: ', response.data):
+        console.log('GET Response: ', response.data);
         renderHistory(response.data);
     })
     .catch(function (error) {
