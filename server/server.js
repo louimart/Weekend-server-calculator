@@ -37,16 +37,58 @@ app.post('/calculations', (req, res) => {
   console.log('POST request made for /calculations');
   const calcToAdd = req.body;
   
+  if (
+    calcToAdd.numOne == null ||
+    calcToAdd.numTwo == null ||
+    calcToAdd.operator == null
+  ){
+    console.log('error', req.body);
+    res.sendStatus(400);
+    return;
+  } else {}
+  console.log(req.body);
 
-//   console.log('error', req.body);
-//   res.sendStatus(400);
-//   return;
-// } else {}
-console.log(req.body);
-
-calculations.push(calcToAdd);
-res.sendStatus(201);
+  calculations.push(calcToAdd);
+  res.sendStatus(201);
 }) // END of POST Route
+
+function calc(event) {
+  event.preventDefault();
+  console.log('in CALCULATE');
+  const numOneElement = document.querySelector('#');
+  const numTwoElement = document.querySelector('#');
+  const operatorElement = document.querySelector('#');
+  const resultElement = `${numOneElement.value}${operatorElement.value}${numTwoElement.value}`;
+  console.log(resultElement);
+
+const newCalcInput = {
+  numOne: numOneElement.value,
+  numTwo: numTwoElement.value,
+  operator: operatorElement.value,
+  result: resultElement
+}
+
+axios({
+  method: 'POST',
+  url: '/calculations',
+  data: newCalcInput,
+})
+.then((response) => {
+  // clear fields
+  numOneElement.value = '';
+  numTwoElement.value = '';
+  operatorElement.value = '';
+  // clear DOM
+  const calclationElement = document.querySelector('#');
+  calclationElement.innerHTML = '';
+  // GET new Data
+  app.get();
+})
+.catch((error) => {
+  console.log('ERROR: ', error);
+});
+}
+
 
 
 
