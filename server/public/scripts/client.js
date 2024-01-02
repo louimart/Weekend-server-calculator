@@ -1,11 +1,38 @@
 console.log('client.js is sourced!');
 
+let operationElement = '';
+
+// GET Current DATA
+function getHistory(){
+    console.log('in getHistory');
+    // axios call to server to get Calculation History
+    axios({
+        method: 'GET',
+        url: '/calculations',
+    })
+    .then(function (response) {
+        console.log('GET Response: ', response.data):
+        renderHistory(response.data);
+    })
+    .catch(function (error) {
+        console.error('GET Error: ', error.message);
+    });
+} // end getHistory
+
+function operate(event) {
+    event.preventDefault();
+    operationElement = document.innerHTML;
+    console.log(operationElement);
+}
+
 function calc(event) {
     event.preventDefault();
     console.log('in CALCULATE');
     const numOneElement = document.querySelector('#firstNumber');
+    console.log(numOneElement);
     const numTwoElement = document.querySelector('#secondNumber');
-    const operatorElement = document.querySelector('#');
+    console.log(numTwoElement);
+    const operatorElement = `${operationElement}`;
     const resultElement = `${numOneElement.value}${operatorElement.value}${numTwoElement.value}`;
     console.log(resultElement);
   
