@@ -52,42 +52,42 @@ app.post('/calculations', (req, res) => {
   res.sendStatus(201);
 }) // END of POST Route
 
-function calc(event) {
-  event.preventDefault();
-  console.log('in CALCULATE');
-  const numOneElement = document.querySelector('#');
-  const numTwoElement = document.querySelector('#');
-  const operatorElement = document.querySelector('#');
-  const resultElement = `${numOneElement.value}${operatorElement.value}${numTwoElement.value}`;
-  console.log(resultElement);
+// function calc(event) {
+//   event.preventDefault();
+//   console.log('in CALCULATE');
+//   const numOneElement = document.querySelector('#');
+//   const numTwoElement = document.querySelector('#');
+//   const operatorElement = document.querySelector('#');
+//   const resultElement = `${numOneElement.value}${operatorElement.value}${numTwoElement.value}`;
+//   console.log(resultElement);
 
-const newCalcInput = {
-  numOne: numOneElement.value,
-  numTwo: numTwoElement.value,
-  operator: operatorElement.value,
-  result: resultElement
-}
+// const newCalcInput = {
+//   numOne: numOneElement.value,
+//   numTwo: numTwoElement.value,
+//   operator: operatorElement.value,
+//   result: resultElement
+// }
 
-axios({
-  method: 'POST',
-  url: '/calculations',
-  data: newCalcInput,
-})
-.then((response) => {
-  // clear fields
-  numOneElement.value = '';
-  numTwoElement.value = '';
-  operatorElement.value = '';
-  // clear DOM
-  const calclationElement = document.querySelector('#');
-  calclationElement.innerHTML = '';
-  // GET new Data
-  app.get();
-})
-.catch((error) => {
-  console.log('ERROR: ', error);
-});
-}
+// axios({
+//   method: 'POST',
+//   url: '/calculations',
+//   data: newCalcInput,
+// })
+// .then((response) => {
+//   // clear fields
+//   numOneElement.value = '';
+//   numTwoElement.value = '';
+//   operatorElement.value = '';
+//   // clear DOM
+//   const calclationElement = document.querySelector('#');
+//   calclationElement.innerHTML = '';
+//   // GET new Data
+//   app.get();
+// })
+// .catch((error) => {
+//   console.log('ERROR: ', error);
+// });
+// }
 
 
 
