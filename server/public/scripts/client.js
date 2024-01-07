@@ -1,5 +1,9 @@
 console.log('client.js is sourced!');
 
+function onReady() {
+  getHistory();
+}
+onReady();
 let operationElement = '';
 
 // GET Current DATA
@@ -28,12 +32,14 @@ function operate(event) {
 function calc(event) {
     event.preventDefault();
     console.log('in CALCULATE');
+    console.log(operationElement);
     const numOneElement = document.querySelector('#firstNumber');
-    console.log(numOneElement);
+    console.log(numOneElement.value);
     const numTwoElement = document.querySelector('#secondNumber');
-    console.log(numTwoElement);
-    const operatorElement = `${operationElement}`;
-    const resultElement = `${numOneElement.value}${operatorElement.value}${numTwoElement.value}`;
+    console.log(numTwoElement.value);
+    const operatorElement = operationElement;
+    console.log(operatorElement);
+    const resultElement = `${numOneElement.value} ${operatorElement} ${numTwoElement.value}`;
     console.log(resultElement);
   
   const newCalcInput = {
@@ -49,6 +55,7 @@ function calc(event) {
     data: newCalcInput,
   })
   .then((response) => {
+console.log('IN Axios POST Request')
     // clear fields
     numOneElement.value = '';
     numTwoElement.value = '';
@@ -57,7 +64,7 @@ function calc(event) {
     const calclationElement = document.querySelector('#recentResult');
     calclationElement.innerHTML = '';
     // GET new Data
-    app.get();
+    getHistory();
   })
   .catch((error) => {
     console.log('ERROR: ', error);
@@ -66,6 +73,8 @@ function calc(event) {
 
   function operate(event) {
     event.preventDefault();
-    console.log('Selected Operator');
-    operatorElement = document.innerHTML;
+    operatorElement = document.querySelector('.plus');
+    console.log('Selected Operator', operatorElement.innerHTML);
+    operationElement = operatorElement.innerHTML
+    console.log(operationElement);
   }
